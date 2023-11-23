@@ -5,15 +5,25 @@ from cars.models import Car
 
 # Create your views here.
 def home(request):
-    teams=Team.objects.all()
-    featured_cars=Car.objects.order_by('-created_date').filter(is_featured=True)
-    all_cars=Car.objects.order_by('-created_date')
-    context={
-        'teams':teams,
-        'featured_cars':featured_cars,
-        'all_cars':all_cars
+    teams = Team.objects.all()
+    featured_cars = Car.objects.order_by('-created_date').filter(is_featured=True)
+    all_cars = Car.objects.order_by('-created_date')
+    model_search = Car.objects.values_list('model', flat=True).distinct()
+    city_search = Car.objects.values_list('city', flat=True).distinct()
+    year_search = Car.objects.values_list('year', flat=True).distinct()
+    body_search = Car.objects.values_list('body_style', flat=True).distinct()
+
+    context = {
+        'teams': teams,
+        'featured_cars': featured_cars,
+        'all_cars': all_cars,
+        'model_search': model_search,
+        'city_search': city_search,
+        'year_search': year_search,
+        'body_search': body_search,
+
     }
-    return render(request, 'pages/index.html',context)
+    return render(request, 'pages/index.html', context)
 
 
 def about(request):
@@ -21,7 +31,7 @@ def about(request):
     context = {
         'teams': teams,
     }
-    return render(request, 'pages/about.html',context)
+    return render(request, 'pages/about.html', context)
 
 
 def services(request):

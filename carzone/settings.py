@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'contact',
 
 ]
 
@@ -140,3 +141,4 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 SITE_ID = 1
+
